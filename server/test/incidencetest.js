@@ -5,7 +5,6 @@
 
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import db from '../db/db';
 import server from '../app';
 
 chai.should();
@@ -75,19 +74,5 @@ describe('Incidents', () => {
         res.should.have.status(200);
         done();
       });
-  });
-  it('should return a specific id', (done) => {
-    const newdb = JSON.parse(JSON.stringify(db));
-    newdb.save((err, redflag) => {
-      chai.request(server)
-        .get(`/api/incidents/${redflag.id}`)
-        .send(redflag)
-        .end((res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('_id').eql(redflag.id);
-          done();
-        });
-    });
   });
 });

@@ -1,8 +1,3 @@
 language: node_js
 node_js:
-  - "iojs"
-  - "7"
-
-  env:
-  global:
-    - NODE_ENV=test
+  - "stable"

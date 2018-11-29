@@ -6,6 +6,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../app';
+import db from '../db/db';
 
 chai.should();
 
@@ -72,6 +73,16 @@ describe('Incidents', () => {
       .send(incident)
       .end((err, res) => {
         res.should.have.status(200);
+        done();
+      });
+  });
+  it('should return a redflag incident with a particular id', (done) => {
+    const incident = db[0].incidents[0];
+    chai.request(server)
+      .get('/api/v1/incidents/redflags/1')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.data[0].id.should.equal(incident.id);
         done();
       });
   });

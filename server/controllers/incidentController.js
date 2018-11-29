@@ -50,19 +50,25 @@ class IncidentController {
   getRedFlag(req, res) {
     const id = parseInt(req.params.id, 10);
     const incident = db[0].incidents;
+    const result = [];
 
     for (let i = 0; i < incident.length; i += 1) {
       if (incident[i].id === id) {
-        res.send({
-          data: incident[i],
-
-        });
+        result.push(incident[i]);
+        break;
       }
     }
-    res.send({
-      status: 404,
-      message: 'sorry id does not exist',
-    });
+    if (result) {
+      res.status(200).send({
+        status: 200,
+        data: result,
+      });
+    } else {
+      res.send({
+        status: 404,
+        message: 'sorry id does not exist',
+      });
+    }
   }
 
   editLocation(req, res) {

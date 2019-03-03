@@ -4,7 +4,7 @@ import incidentController from '../controllers/incidentController';
 
 
 const router = express.Router();
-app.get('/', (req, res) => res.status(200).send({ message: 'Hello welcome to my page' }));
+router.get('/', (req, res) => res.status(200).send({ message: 'Hello welcome to my page' }));
 
 router.get('/api/v1/users', userController.getAllUsers);
 router.get('/api/v1/users/login', userController.getAllUsers);
